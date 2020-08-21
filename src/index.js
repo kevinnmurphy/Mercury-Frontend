@@ -19,5 +19,10 @@ function handleFormSubnmit(e) {
 }
 
 function formToggle() {
-    addBtn.addEventListener("click", () => )
+    tripBtn.addEventListener("click", () => {
+        tripFormConatainer.classLiust.toggle('d-none')
+    })
+    locaitonBtn.addEventListener("click", () => {
+        locationFormConatainer.classLiust.toggle('d-none')
+    })
 }
