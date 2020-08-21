@@ -9,6 +9,7 @@ class TripAdapter{
             .then(json => {
                 json.data.forEach((trip) => this.sanitizeAndAdd(trip))
             })
+            // debugger
             // .catch((err) )
     }
 
@@ -50,14 +51,18 @@ class TripAdapter{
     deleteTrip() {
         const config = {
             method: 'DELETE',
-            body: JSON.stringify(trip),
+            body: JSON.stringify(trip.id),
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
         }
 
-        fetch(`http://`)
+        fetch(this.baseUrl + id, config)
+            .then(res => res.json())
+            .then(json => {
+                json.data.forEach((trip) => this.sanitizeAndAdd(trip))
+            })
     }
 
     updateDom() {
@@ -71,19 +76,28 @@ class TripAdapter{
         const tripDiv = document.createElement('div')
 
         tripDiv.classList.add('trip')
-        // tripDiv.setAttribute()
-        tripCollection.appendChild(tripDiv);
+        tripDiv.setAttribute()
+        tripCollection.appendChild(tripDiv)
 
-        let tripName = document.createElement('h2');
-        tripDiv.appendChild(toyName);
-        toyName.innerText = `${toy.name}`;
+        let tripName = document.createElement('h2')
+        tripDiv.appendChild(tripName)
+        tripName.innerText = `${trip.name}`
 
+
+        // let locationBtn = document.createElement("button");
+        // locationBtn.classList.add('location-btn');
+        // locationBtn.innerHTML = "Add Location";
+        // tripDiv.appendChild(locationBtn);
+
+        // locationBtn.addEventListener("click", () => {
+        //     locationFormConatainer.classList.toggle('d-none')
+        // })
 
     }
 
-    sanitizeAndAdd(tripObj) {
-        let sanitized = {...tripObj.attributes}
+    sanitizeAndAdd(res) {
+        let sanitized = {...res.attributes}
         let trip = new Trip(sanitized)
-        trip.attachToDom()
+        // trip.attachToDom()
     }
 }

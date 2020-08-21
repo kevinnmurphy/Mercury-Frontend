@@ -4,25 +4,27 @@ document.addEventListener('DOMContentLoaded', () => {
     tripAdapter.fetchTrips()
     // trip.addEventListener('submit', handleFormSubnmit)
     // tripList.addEventListener('click', handleListClick)
+    formToggle()
 })
 
 // function handleListClick(e) {
 //     if (e.target)
 // }
 
-function handleFormSubnmit(e) {
+function handleFormSubmit(e) {
     e.preventDefault()
 
     const location = document.querySelector('#location-name')
-    const lat = document.querySelector('#trip-name')
-    const lon = document.querySelector('#trip-name')
+    const lat = document.querySelector('#location-lat')
+    const lon = document.querySelector('#location-lon')
 }
 
 function formToggle() {
+    const tripFormContainer = document.querySelector('#trip-form')
+    const tripBtn = document.querySelector('#new-trip-btn')
+    debugger
+
     tripBtn.addEventListener("click", () => {
-        tripFormConatainer.classLiust.toggle('d-none')
-    })
-    locaitonBtn.addEventListener("click", () => {
-        locationFormConatainer.classLiust.toggle('d-none')
+        tripFormContainer.classList.toggle('d-none')
     })
 }

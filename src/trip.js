@@ -5,4 +5,6 @@ class Trip {
         this.name = name;
     }
 
+    
+
 }
