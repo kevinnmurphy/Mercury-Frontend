@@ -1,13 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-   Sample text - replace me! 
-  </body>
+    <head>
+        <meta charset="utf-8">
 
-  <script type="application/javascript" src="src/index.js" charset="UTF-8"></script>
-  
+        <title>Mercurial</title>
+
+        <link rel="stylesheet" href="styles.css">
+
+    </head>
+
+    <body>
+
+    <header>
+        <h1>Welcome to the Mercurial App</h1>
+    </header>
+
+    <main>
+        <h2>Here are your trips:</h2>
+
+        <ul id="trip-list">
+
+        </ul>
+
+        <h3>Add new Trip</h3>
+
+        <form id="trip-form">
+            <label for="trip-name">Name:</label>
+            <input type="text" name="name" id="trip-name"><br>
+            <label for="trip-description">Description:</label>
+            <input type="text" name="description" id="trip-description"><br>
+
+            <input type="submit" value="Create">
+
+        </form>
+
+    </main>
+
+    </body>
+
+    <script type="application/javascript" src="src/trip.js" charset="UTF-8"></script>
+    <script type="application/javascript" src="src/tripAdapter.js" charset="UTF-8"></script>
+    <script type="application/javascript" src="src/index.js" charset="UTF-8"></script>
+
 </html>
