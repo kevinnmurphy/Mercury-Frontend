@@ -94,11 +94,15 @@ class TripAdapter{
 
     // }
 
+    // sanitizeAndAdd(res) {
+    //     let sanitized = {...res.attributes}
+    //     let trip = new Trip(sanitized)
+    //     trip.attachToDom()
+    // }
+
+
     sanitizeAndAdd(res) {
-        let sanitized = {...res.attributes}
-        debugger
-        let trip = new Trip(sanitized)
-        debugger
+        let trip = new Trip({id: res.id, ...res.attributes})
         trip.attachToDom()
     }
 }

@@ -1,11 +1,12 @@
 class Trip {
     static all = []
 
-    constructor({name}){
-        this.name = name;
+    constructor({id, name}){
+        this.id = id
+        this.name = name
 
         this.element = document.createElement('div')
-        // this.element.id = `trip-${id}`
+        this.element.id = `trip-${id}`
         this.tripCollection = document.querySelector('#trip-collection')
 
         Trip.all.push(this)
