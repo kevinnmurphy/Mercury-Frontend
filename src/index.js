@@ -1,4 +1,5 @@
-const tripAdapter = new TripAdapter("http://localhost:3000/trips")
+const baseUrl = "http://localhost:3000"
+const tripAdapter = new TripAdapter(`${baseUrl}/trips`)
 
 document.addEventListener('DOMContentLoaded', () => {
     tripAdapter.fetchTrips()
@@ -22,7 +23,6 @@ function handleFormSubmit(e) {
 function formToggle() {
     const tripFormContainer = document.querySelector('#trip-form')
     const tripBtn = document.querySelector('#new-trip-btn')
-    debugger
 
     tripBtn.addEventListener("click", () => {
         tripFormContainer.classList.toggle('d-none')

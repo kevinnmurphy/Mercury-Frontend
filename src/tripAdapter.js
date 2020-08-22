@@ -9,7 +9,6 @@ class TripAdapter{
             .then(json => {
                 json.data.forEach((trip) => this.sanitizeAndAdd(trip))
             })
-            // debugger
             // .catch((err) )
     }
 
@@ -69,35 +68,37 @@ class TripAdapter{
 
     }
 
-    attachToDom() {
-        const tripCollection = document.querySelector('#trip-collection')
-        const tripList = document.querySelector('#trip-list')
+    // attachToDom() {
+    //     const tripCollection = document.querySelector('#trip-collection')
+    //     const tripList = document.querySelector('#trip-list')
 
-        const tripDiv = document.createElement('div')
+    //     const tripDiv = document.createElement('div')
 
-        tripDiv.classList.add('trip')
-        tripDiv.setAttribute()
-        tripCollection.appendChild(tripDiv)
+    //     tripDiv.classList.add('trip')
+    //     tripDiv.setAttribute()
+    //     tripCollection.appendChild(tripDiv)
 
-        let tripName = document.createElement('h2')
-        tripDiv.appendChild(tripName)
-        tripName.innerText = `${trip.name}`
+    //     let tripName = document.createElement('h2')
+    //     tripDiv.appendChild(tripName)
+    //     tripName.innerText = `${trip.name}`
 
 
-        // let locationBtn = document.createElement("button");
-        // locationBtn.classList.add('location-btn');
-        // locationBtn.innerHTML = "Add Location";
-        // tripDiv.appendChild(locationBtn);
+    //     // let locationBtn = document.createElement("button");
+    //     // locationBtn.classList.add('location-btn');
+    //     // locationBtn.innerHTML = "Add Location";
+    //     // tripDiv.appendChild(locationBtn);
 
-        // locationBtn.addEventListener("click", () => {
-        //     locationFormConatainer.classList.toggle('d-none')
-        // })
+    //     // locationBtn.addEventListener("click", () => {
+    //     //     locationFormConatainer.classList.toggle('d-none')
+    //     // })
 
-    }
+    // }
 
     sanitizeAndAdd(res) {
         let sanitized = {...res.attributes}
+        debugger
         let trip = new Trip(sanitized)
-        // trip.attachToDom()
+        debugger
+        trip.attachToDom()
     }
 }
