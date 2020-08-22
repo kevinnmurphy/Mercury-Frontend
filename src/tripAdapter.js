@@ -9,7 +9,7 @@ class TripAdapter{
             .then(json => {
                 json.data.forEach((trip) => this.sanitizeAndAdd(trip))
             })
-            // .catch((err) )
+            .catch((err) => console.log(err.message))
     }
 
     createTrip(trip) {
@@ -21,12 +21,10 @@ class TripAdapter{
                 'Accept': 'application/json'
             }
         }
-        fetch(this.baseUrl)
+        fetch(this.baseUrl, config)
             .then(res => res.json())
-            .then(json => {
-                json.data.forEach((trip) => this.sanitizeAndAdd(trip))
-            })
-            // .catch((err) )
+            .then(json => this.sanitizeAndAdd(json))
+            .catch((err) => console.log(err.message))
     }
 
     patchTrip(id) {
@@ -39,12 +37,12 @@ class TripAdapter{
             }
         }
 
-        fetch(this.baseUrl + id)
+        fetch(this.baseUrl + id, config)
             .then(res => res.json())
             .then(json => {
                 json.data.forEach((trip) => this.sanitizeAndAdd(trip))
             })
-            .catch((err) )
+            .catch((err) => console.log(err.message))
     }
 
     deleteTrip() {
@@ -59,9 +57,8 @@ class TripAdapter{
 
         fetch(this.baseUrl + id, config)
             .then(res => res.json())
-            .then(json => {
-                json.data.forEach((trip) => this.sanitizeAndAdd(trip))
-            })
+            .then(json => e.target.parentNode.remove())
+            .catch((err) => console.log(err.message))
     }
 
     updateDom() {
@@ -92,12 +89,6 @@ class TripAdapter{
     //     //     locationFormConatainer.classList.toggle('d-none')
     //     // })
 
-    // }
-
-    // sanitizeAndAdd(res) {
-    //     let sanitized = {...res.attributes}
-    //     let trip = new Trip(sanitized)
-    //     trip.attachToDom()
     // }
 
 

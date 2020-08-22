@@ -12,8 +12,24 @@ class Trip {
         Trip.all.push(this)
     }
 
+    handleClick = (e) => {
+
+
+        // if (e.target.className === 'delete') {
+        //     itemAdapter.deleteTrip(id)
+        // } else if (e.target.className === 'update') {
+
+        // } else if (e.target.className === 'save') {
+        //     itemAdapter.patchTrip(id)
+        // }
+    }
+
     fullRender() {
         this.element.innerHTML = `<h3>${this.name}</h3>`
+        
+        // add location button
+        // this.element.appendChild
+        // <button id="new-trip-btn">Add Trip</button>
         return this.element
     }
 
@@ -26,5 +42,4 @@ class Trip {
         // this.element.addEventListeners('click', this.displayLocations
     }
     
-
 }

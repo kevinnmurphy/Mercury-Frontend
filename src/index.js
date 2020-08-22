@@ -1,9 +1,10 @@
 const baseUrl = "http://localhost:3000"
 const tripAdapter = new TripAdapter(`${baseUrl}/trips`)
+const tripForm = document.querySelector('#trip-form')
 
 document.addEventListener('DOMContentLoaded', () => {
     tripAdapter.fetchTrips()
-    // trip.addEventListener('submit', handleFormSubnmit)
+    tripForm.addEventListener('submit', handleFormSubmit)
     // tripList.addEventListener('click', handleListClick)
     formToggle()
 })
@@ -15,16 +16,28 @@ document.addEventListener('DOMContentLoaded', () => {
 function handleFormSubmit(e) {
     e.preventDefault()
 
-    const location = document.querySelector('#location-name')
-    const lat = document.querySelector('#location-lat')
-    const lon = document.querySelector('#location-lon')
+    const name  = tripForm.querySelector('input[name="name"]').value
+    const description = tripForm.querySelector('input[name="description"]').value
+
+
+
+    let formData = {
+        name,
+        description
+      }
+
+    tripAdapter.createTrip(formData)
+    tripForm.reset()
+    //   debugger
+    // const location = document.querySelector('#location-name')
+    // const lat = document.querySelector('#location-lat')
+    // const lon = document.querySelector('#location-lon')
 }
 
 function formToggle() {
-    const tripFormContainer = document.querySelector('#trip-form')
     const tripBtn = document.querySelector('#new-trip-btn')
 
     tripBtn.addEventListener("click", () => {
-        tripFormContainer.classList.toggle('d-none')
+        tripForm.classList.toggle('d-none')
     })
 }
