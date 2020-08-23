@@ -8,9 +8,9 @@ body {
 }
 
 .trips {
-    
+    background: rgba(200, 200, 200, 10);
 }
 
-.updated-at {
-    font-size: .5em;
+.updated_at {
+    font-size: .6em;
 }

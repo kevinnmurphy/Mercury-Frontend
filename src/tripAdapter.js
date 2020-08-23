@@ -4,7 +4,7 @@ class TripAdapter{
     }
 
     fetchTrips() {
-        fetch(this.baseUrl)
+        fetch("http://localhost:3000/trips")
             .then(res => res.json())
             .then(json => {
                 json.data.forEach((trip) => this.sanitizeAndAdd(trip))
@@ -13,7 +13,7 @@ class TripAdapter{
     }
 
     createTrip(trip) {
-        const config = {
+        let config = {
             method: 'POST',
             body: JSON.stringify(trip),
             headers: {
@@ -21,44 +21,59 @@ class TripAdapter{
                 'Accept': 'application/json'
             }
         }
-        fetch(this.baseUrl, config)
+        fetch(`${this.baseUrl}/trips`, config)
             .then(res => res.json())
             .then(json => this.sanitizeAndAdd(json))
             .catch((err) => console.log(err.message))
     }
+      
+    patchTrip(tripId) {
+        const form = document.querySelector(`#update-form-${tripId}`)
+        const name = form.querySelector('#trip-name').value
+        const description = form.querySelector('#trip-description').value
+        // const name = document.querySelector(`trip-name-${id}`).value
+        // const description = document.querySelector(`trip-description-${id}`).value
+        
+        let tripObj = {
+            name,
+            description
+        }
 
-    patchTrip(id) {
-        const config = {
+        let config = {
             method: 'PATCH',
-            body: JSON.stringify(trip),
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
-            }
+            },
+            body: JSON.stringify(tripObj)
         }
 
-        fetch(this.baseUrl + id, config)
-            .then(res => res.json())
-            .then(json => this.updateDom(json.data))
+        fetch(`http://localhost:3000/trips/${tripId}`, config)
+            .then(res => {
+                debugger
+                res.json()})
+            .then(json => {
+                let trip  = Trip.all.find((i) => i.tripId == json.data.id)
+                trip.updateTripOnDom(json.data.attributes)
+                
+            })
             .catch((err) => console.log(err.message))
 
-        const form = document.querySelector(`#update-form-${tripId}`)
         form.remove()
     }
 
     deleteTrip(id) {
-        const config = {
+        let config = {
             method: 'DELETE',
-            body: JSON.stringify(trip.id),
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
         }
 
-        fetch(this.baseUrl + id, config)
+        fetch(`${this.baseUrl}/trips/${id}`, config)
             .then(res => res.json())
-            .then(json => e.target.parentNode.remove())
+            .then(json => alert(json.message))
             .catch((err) => console.log(err.message))
     }
 
@@ -66,40 +81,5 @@ class TripAdapter{
         let trip = new Trip({id: res.id, ...res.attributes})
         trip.attachToDom()
     }
-
-    updateDom(tripData) {
-        const trip = Trip.findById(tripData.id)
-        trip.name = tripData.attributes.name
-        trip.description = tripData.attributes.description
-        trip.fullRender()
-    }
-
-    // attachToDom() {
-    //     const tripCollection = document.querySelector('#trip-collection')
-    //     const tripList = document.querySelector('#trip-list')
-
-    //     const tripDiv = document.createElement('div')
-
-    //     tripDiv.classList.add('trip')
-    //     tripDiv.setAttribute()
-    //     tripCollection.appendChild(tripDiv)
-
-    //     let tripName = document.createElement('h2')
-    //     tripDiv.appendChild(tripName)
-    //     tripName.innerText = `${trip.name}`
-
-
-    //     // let locationBtn = document.createElement("button");
-    //     // locationBtn.classList.add('location-btn');
-    //     // locationBtn.innerHTML = "Add Location";
-    //     // tripDiv.appendChild(locationBtn);
-
-    //     // locationBtn.addEventListener("click", () => {
-    //     //     locationFormConatainer.classList.toggle('d-none')
-    //     // })
-
-    // }
-
-
 
 }
