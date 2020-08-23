@@ -24,10 +24,10 @@ class Trip {
         return Trip.all.find((item) => item.id == id)
     }
 
-    // get updatedAt() {
-    //     new Date(Date.UTC(this.updated_at.innerText)),
-    //     options = {weekday: 'short', month: 'short', day: 'numeric' }
-    // }
+    get updatedAt() {
+        new Date(Date.UTC(this.updated_at.innerText) * 1000),
+        options = {weekday: 'short', month: 'short', day: 'numeric' }
+    }
 
     handleClick = (e) => {
         if (e.target.className === 'delete') {
@@ -48,7 +48,12 @@ class Trip {
         this.name = name
         this.description = description
         this.updated_at = updated_at
-        this.fullRender()
+
+        let tripElement = document.querySelector(`#trip-${this.id}`)
+
+        tripElement.querySelector('.title').innerText = name
+        tripElement.querySelector('.description').innerText = description
+        tripElement.querySelector('.updated_at').innerText = updated_at
     }
 
     addUpdateTripFields() {

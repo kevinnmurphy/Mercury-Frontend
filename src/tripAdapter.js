@@ -12,18 +12,34 @@ class TripAdapter{
             .catch((err) => console.log(err.message))
     }
 
-    createTrip(trip) {
+    // createTrip(tripObj) {
+    //     const configObj = {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         "Accepts": "application/json"
+    //       },
+    //       body: JSON.stringify(tripObj)
+    //     }
+    //     fetch(this.baseUrl, configObj)
+    //       .then(res => res.json())
+    //       .then(json => this.sanitizeAndAdd(json));
+    // }
+
+    createTrip(tripObj) {
         let config = {
             method: 'POST',
-            body: JSON.stringify(trip),
+            body: JSON.stringify(tripObj),
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
         }
-        fetch(`${this.baseUrl}/trips`, config)
+        fetch(`${baseUrl}/trips`, config)
             .then(res => res.json())
-            .then(json => this.sanitizeAndAdd(json))
+            .then(json => {
+                return this.sanitizeAndAdd(json.data)
+            })
             .catch((err) => console.log(err.message))
     }
       
@@ -48,14 +64,13 @@ class TripAdapter{
             body: JSON.stringify(tripObj)
         }
 
-        fetch(`http://localhost:3000/trips/${tripId}`, config)
-            .then(res => {
-                debugger
-                res.json()})
+        fetch(`${baseUrl}/trips/${tripId}`, config)
+            .then(res => res.json())
             .then(json => {
-                let trip  = Trip.all.find((i) => i.tripId == json.data.id)
-                trip.updateTripOnDom(json.data.attributes)
                 
+                let tripNew  = Trip.all.find((i) => i.id == json.data.id)
+                debugger
+                tripNew.updateTripOnDom({...json.data.attributes}) 
             })
             .catch((err) => console.log(err.message))
 
@@ -71,7 +86,7 @@ class TripAdapter{
             }
         }
 
-        fetch(`${this.baseUrl}/trips/${id}`, config)
+        fetch(`${baseUrl}/trips/${id}`, config)
             .then(res => res.json())
             .then(json => alert(json.message))
             .catch((err) => console.log(err.message))
