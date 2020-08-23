@@ -39,13 +39,14 @@ class TripAdapter{
 
         fetch(this.baseUrl + id, config)
             .then(res => res.json())
-            .then(json => {
-                json.data.forEach((trip) => this.sanitizeAndAdd(trip))
-            })
+            .then(json => this.updateDom(json.data))
             .catch((err) => console.log(err.message))
+
+        const form = document.querySelector(`#update-form-${tripId}`)
+        form.remove()
     }
 
-    deleteTrip() {
+    deleteTrip(id) {
         const config = {
             method: 'DELETE',
             body: JSON.stringify(trip.id),
@@ -61,8 +62,16 @@ class TripAdapter{
             .catch((err) => console.log(err.message))
     }
 
-    updateDom() {
+    sanitizeAndAdd(res) {
+        let trip = new Trip({id: res.id, ...res.attributes})
+        trip.attachToDom()
+    }
 
+    updateDom(tripData) {
+        const trip = Trip.findById(tripData.id)
+        trip.name = tripData.attributes.name
+        trip.description = tripData.attributes.description
+        trip.fullRender()
     }
 
     // attachToDom() {
@@ -92,8 +101,5 @@ class TripAdapter{
     // }
 
 
-    sanitizeAndAdd(res) {
-        let trip = new Trip({id: res.id, ...res.attributes})
-        trip.attachToDom()
-    }
+
 }

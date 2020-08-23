@@ -6,3 +6,11 @@ body {
 .d-none{
     display: none;
 }
+
+.trips {
+    
+}
+
+.updated-at {
+    font-size: .5em;
+}
