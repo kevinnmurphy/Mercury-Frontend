@@ -29,6 +29,10 @@ class Trip {
         options = {weekday: 'short', month: 'short', day: 'numeric' }
     }
 
+    get locations() {
+       return Location.all.filter((location) => location.trip_id == this.id)
+    }
+
     handleClick = (e) => {
         if (e.target.className === 'delete') {
             tripAdapter.deleteTrip(this.id)
@@ -90,7 +94,7 @@ class Trip {
         const deleteBtn = document.createElement('button')
         deleteBtn.classList.add('delete')
         deleteBtn.dataset.id = this.id
-        deleteBtn.innerText = "Delete"
+        deleteBtn.innerText = "x"
         const updateBtn = document.createElement('button')
         updateBtn.classList.add('update')
         updateBtn.dataset.id = this.id

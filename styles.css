@@ -24,9 +24,17 @@ button {
     border-radius: 4px;
 }
 
+button:hover {
+    background-color: rgba(0,0,0,0.1);
+}
+
 .delete {
-    float: right;
-    /* position: absolute; */
+    position: absolute;
+    display: inline-block;
+    align-self: flex-end;
+    border: none;
+    background-color: rgba(0,0,0,0);
+    color: gray;
 }
 
 .d-non-map {
