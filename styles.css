@@ -1,11 +1,46 @@
+header {
+    background-color: rgba(0,0,0,.1);
+    border-bottom: double gray;
+}
+
+h1 {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+
+h2 {
+    margin: 8px;
+    /* text-align: center; */
+}
+
 body {
     margin: 0;
     font-family: 'Baloo Tamma 2', cursive;
     grid-template-rows: auto 1fr auto;
 }
 
+button {
+    border-radius: 4px;
+}
+
+.delete {
+    float: right;
+    /* position: absolute; */
+}
+
+.d-non-map {
+    /* splits screen for map display */
+    display: inline-block;
+}
+
 .d-none{
     display: none;
+}
+
+#new-trip-btn {
+    float: right;
+    margin: 10px;
 }
 
 #trip-collection {
@@ -22,6 +57,9 @@ body {
     flex-direction: column;
     padding: 1em;
     justify-content: space-between;
+    border-radius: 5px 15px;
+    border: 2px solid gray;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
 }
 
 .title {
