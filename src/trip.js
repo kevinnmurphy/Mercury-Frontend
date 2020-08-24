@@ -59,8 +59,8 @@ class Trip {
     addUpdateTripFields() {
         const updateForm = 
         `
-        <input type="text" name="name" id="trip-name" value="${this.name}"<br>
-        <input type="text" name="description" id="trip-description" value="${this.description}"><br>
+        <input type="text" name="name" id="trip-name" class="update-form" value="${this.name}"<br>
+        <input type="text" name="description" id="trip-description" class="update-form" value="${this.description}"><br>
         `
 
         const formDiv = document.createElement('div')
@@ -76,7 +76,6 @@ class Trip {
     //     el.appendChild(deleteButton)
     // }
 
-
     fullRender() {
         const title = document.createElement('h3')
         title.innerText = this.name
@@ -88,10 +87,6 @@ class Trip {
         upAt.innerText = `(${this.updated_at})`
         upAt.classList.add('updated_at')
 
-        this.element.appendChild(title)
-        this.element.appendChild(desc)
-        
-
         const deleteBtn = document.createElement('button')
         deleteBtn.classList.add('delete')
         deleteBtn.dataset.id = this.id
@@ -101,23 +96,43 @@ class Trip {
         updateBtn.dataset.id = this.id
         updateBtn.innerText = 'Update'
 
+        const locationList = document.createElement('ul')
+        locationList.classList.add('locationList')
+        locationList.classList.add('d-none')
+        // locationItem.dataset.id = this.id
+
+        this.element.appendChild(title)
+        this.element.appendChild(desc)
         this.element.appendChild(deleteBtn)
         this.element.appendChild(updateBtn)
-
         this.element.appendChild(upAt)
 
-        
-        // add location button
-        // locationBtn = document.createElement('button')
-        // locationBtn.classList.
-        // this.element.appendChild()
-        // <button id="new-trip-btn">Add Trip</button>
+        title.addEventListener('click', this.locationToggle)
+
         return this.element
     }
 
     attachToDom() {
         this.tripCollection.append(this.fullRender())
         this.addEventListeners()
+    }
+
+    locationRender() {
+        const location = document.createElement('span')
+        location.innerText = `(${this.location})`
+        location.classList.add('location-${id}')
+    }
+
+    locationToggle() {
+        debugger
+        this.tripCollection.append(this.locationRender())
+        this.addEventListeners()
+
+        const tripBtn = document.querySelector('#new-trip-btn')
+
+        tripBtn.addEventListener("click", () => {
+            tripForm.classList.toggle('d-none')
+        })
     }
 
 }
