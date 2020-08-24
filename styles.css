@@ -1,14 +1,35 @@
 body {
     margin: 0;
-    font-family: 'Baloo Tamma 2', cursive;;
+    font-family: 'Baloo Tamma 2', cursive;
+    grid-template-rows: auto 1fr auto;
 }
 
 .d-none{
     display: none;
 }
 
+#trip-collection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .trips {
     background: rgba(200, 200, 200, 10);
+    margin: 10px;
+    display: flex;
+    flex: 1 0 150px;
+    flex-direction: column;
+    padding: 1em;
+    justify-content: space-between;
+}
+
+.title {
+    margin: 10px;
+}
+
+.description {
+    vertical-align: middle;
 }
 
 .updated_at {
