@@ -4,27 +4,13 @@ class TripAdapter{
     }
 
     fetchTrips() {
-        fetch("http://localhost:3000/trips")
+        fetch(`${baseUrl}/trips`)
             .then(res => res.json())
             .then(json => {
                 json.data.forEach((trip) => this.sanitizeAndAdd(trip))
             })
             .catch((err) => console.log(err.message))
     }
-
-    // createTrip(tripObj) {
-    //     const configObj = {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         "Accepts": "application/json"
-    //       },
-    //       body: JSON.stringify(tripObj)
-    //     }
-    //     fetch(this.baseUrl, configObj)
-    //       .then(res => res.json())
-    //       .then(json => this.sanitizeAndAdd(json));
-    // }
 
     createTrip(tripObj) {
         let config = {
@@ -69,7 +55,6 @@ class TripAdapter{
             .then(json => {
                 
                 let tripNew  = Trip.all.find((i) => i.id == json.data.id)
-                debugger
                 tripNew.updateTripOnDom({...json.data.attributes}) 
             })
             .catch((err) => console.log(err.message))
