@@ -1,27 +1,31 @@
 class Trip {
     static all = []
 
-    constructor({id, name, description, updated_at}){
+    constructor({id, name, description, updated_at, locations}){
         this.id = id
         this.name = name
         this.description = description
         this.updated_at = updated_at
+        // this.locations = locations
 
         this.element = document.createElement('div')
         this.element.id = `trip-${id}`
         this.element.classList.add('trips')
 
         this.tripCollection = document.querySelector('#trip-collection')
+        this.locationCollection = document.querySelector('#location-collection')
 
         Trip.all.push(this)
     }
     
     addEventListeners() {
         this.element.addEventListener('click', this.handleClick)
+        this.element.addEventListener('click', this.displayLocations)
+        // debugger
     }
 
     static findById(id) {
-        return Trip.all.find((item) => item.id == id)
+        return Trip.all.find((trip) => trip.id == id)
     }
 
     get updatedAt() {
@@ -100,42 +104,55 @@ class Trip {
         updateBtn.dataset.id = this.id
         updateBtn.innerText = 'Update'
 
-        const locationList = document.createElement('ul')
-        locationList.classList.add('locationList')
-        locationList.classList.add('d-none')
-        // locationItem.dataset.id = this.id
-
         this.element.appendChild(title)
         this.element.appendChild(desc)
         this.element.appendChild(deleteBtn)
         this.element.appendChild(updateBtn)
         this.element.appendChild(upAt)
 
-        title.addEventListener('click', this.locationToggle)
+        // element.addEventListener('click', this.locationToggle)
+
+        const tripCollection = document.querySelector('#trip-collection')
+        tripCollection.classList.toggle('trip-collection-toggle')
 
         return this.element
     }
 
     attachToDom() {
         this.tripCollection.append(this.fullRender())
+        // debugger
         this.addEventListeners()
     }
 
-    locationRender() {
-        const location = document.createElement('span')
-        location.innerText = `(${this.location})`
-        location.classList.add('location-${id}')
+
+
+    displayLocations () {() =>
+        console.log('display locations clicked')
+        this.locations.forEach((i) => {
+            i.attachLToDom()
+        })
     }
 
     locationToggle() {
-        debugger
-        this.tripCollection.append(this.locationRender())
-        this.addEventListeners()
 
-        const tripBtn = document.querySelector('#new-trip-btn')
+        const locationList = document.createElement('ul')
+        locationList.classList.add('locationList')
+        locationList.classList.add('d-none')
+        // locationItem.dataset.id = this.id
 
-        tripBtn.addEventListener("click", () => {
-            tripForm.classList.toggle('d-none')
+        
+
+        const locationBtn = document.querySelector('.locationBtn')
+        locationBtn.classList.toggle('d-none')
+
+        // Toggles trip collection from row to column
+        // const tripCollection = document.querySelector('#trip-collection')
+        // tripCollection.classList.toggle('trip-collection-toggle')
+
+        // this.tripCollection.append(this.locationRender())
+        // this.addEventListeners()
+        locationBtn.addEventListener("click", () => {
+            locationForm.classList.toggle('d-none')
         })
     }
 

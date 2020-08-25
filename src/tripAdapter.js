@@ -78,7 +78,7 @@ class TripAdapter{
     }
 
     sanitizeAndAdd(res) {
-        let trip = new Trip({id: res.id, ...res.attributes})
+        let trip = new Trip({id: res.id, ...res.attributes, ...res.relationships.locations.data})
         trip.attachToDom()
     }
 
