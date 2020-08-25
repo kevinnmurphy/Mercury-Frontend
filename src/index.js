@@ -1,14 +1,14 @@
 const baseUrl = "http://localhost:3000"
 const tripAdapter = new TripAdapter
-// const tripAdapter = new TripAdapter
+const locationAdapter = new LocationAdapter
 const tripForm = document.querySelector('#trip-form')
-const locationAdapter = new LocationAdapter(`${baseUrl}`)
 const locationForm = document.querySelector('#location-form')
 
 document.addEventListener('DOMContentLoaded', () => {
     tripAdapter.fetchTrips()
+    locationAdapter.fetchLocations()
     tripForm.addEventListener('submit', handleFormSubmit)
-    // tripList.addEventListener('click', handleListClick)
+    locationForm.addEventListener('submit', handleFormSubmitLocation)
     formToggle()
 })
 
@@ -21,7 +21,7 @@ function handleFormSubmit(e) {
     let formData = {
         name,
         description
-      }
+    }
 
     tripAdapter.createTrip(formData)
     tripForm.reset()
