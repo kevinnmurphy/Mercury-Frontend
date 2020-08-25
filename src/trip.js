@@ -12,7 +12,7 @@ class Trip {
         this.element.id = `trip-${id}`
         this.element.classList.add('trips')
 
-        this.tripCollection = document.querySelector('#trip-column')
+        this.tripCollection = document.querySelector('#trip-list')
         this.locationCollection = document.querySelector('#location-list')
 
         Trip.all.push(this)
@@ -72,41 +72,15 @@ class Trip {
         tripElement.querySelector('.description').innerText = description
         tripElement.querySelector('.updated_at').innerText = updated_at
     }
-    
-    // createDeleteButton(el) {
-    //     this.deleteButton = document.createElement('button')
-    //     this.deleteButton.textContent = 'Delete'
-    //     // this.deleteButton.addEventListener('click', deleteTrip)
-    //     el.appendChild(deleteButton)
-    // }
 
     fullRender() {
-        const title = document.createElement('h3')
-        title.innerText = this.name
-        title.classList.add('title')
-        const desc = document.createElement('p')
-        desc.innerText = this.description
-        desc.classList.add('description')
-        const upAt = document.createElement('span')
-        upAt.innerText = `(${this.updated_at})`
-        upAt.classList.add('updated_at')
-
-        const deleteBtn = document.createElement('button')
-        deleteBtn.classList.add('delete')
-        deleteBtn.dataset.id = this.id
-        deleteBtn.innerText = "x"
-        const updateBtn = document.createElement('button')
-        updateBtn.classList.add('update')
-        updateBtn.dataset.id = this.id
-        updateBtn.innerText = 'Update'
-
-        this.element.appendChild(title)
-        this.element.appendChild(desc)
-        this.element.appendChild(deleteBtn)
-        this.element.appendChild(updateBtn)
-        this.element.appendChild(upAt)
-
-        // element.addEventListener('click', this.locationToggle)
+        this.element.innerHTML = `
+            <h3 class="title">${this.name}</h3>
+            <p class="description">${this.description}</p>
+            <button class="delete" data-id="${this.id}">x</button>
+            <button class="update" data-id="${this.id}">Update</button>
+            <span class="updated_at">(${this.updated_at})</span>
+        `
 
         const tripCollection = document.querySelector('#trip-column')
         tripCollection.classList.toggle('trip-collection-toggle')
@@ -130,7 +104,6 @@ class Trip {
     displayLocations = () => {
         const locationList = document.querySelector('#location-list')
         locationList.innerHTML = ''
-        debugger
         Trip.findById(this.id).locations().forEach((i) => {
             i.attachToDom()
         })
@@ -159,31 +132,4 @@ class Trip {
         })
     }
 
-
-    // handleFormSubmit(e) {
-    //     e.preventDefault()
-    //     const tripForm = document.querySelector('#trip-form')
-    //     const locationForm = document.querySelector('#location-form')
-    
-    //     const name  = tripForm.querySelector('input[name="name"]').value
-    //     const description = tripForm.querySelector('input[name="description"]').value
-    
-    //     let formData = {
-    //         name,
-    //         description
-    //     }
-    
-    //     tripAdapter.createTrip(formData)
-    //     tripForm.reset()
-    // }
-    
-    // formToggle() {
-    //     const tripBtn = document.querySelector('#new-trip-btn')
-    //     const tripForm = document.querySelector('#trip-form')
-    //     const locationForm = document.querySelector('#location-form')
-    
-    //     tripBtn.addEventListener("click", () => {
-    //         tripForm.classList.toggle('d-none')
-    //     })
-    // }
 }

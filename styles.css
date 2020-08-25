@@ -82,19 +82,20 @@ button:hover {
 
 /* FIX THIS COLUMN MESS */
 
-#trip-column, #location-column, #location-list{
-    display: flex;
+#trip-column, #location-column, #map-column{
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
+    width: 33%;
 }
 
-.trip-collection-toggle {
+/* .trip-collection-toggle {
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
     width: 33%;
-}
+} */
 
 .trips, .locations{
     background: rgba(200, 200, 200, 10);

@@ -1,12 +1,13 @@
 class Location {
     static all = []
 
-    constructor({id, name, lat, lon, trip_id}){
+    constructor({id, name, lat, lon, trip_id, updated_at}){
         this.id = id
         this.name = name
         this.lat = lat 
         this.lon = lon 
         this.trip_id = trip_id
+        this.updated_at = updated_at
 
         this.element = document.createElement('div')
         this.element.id = `location-${id}`
@@ -61,37 +62,19 @@ class Location {
         let locationElement = document.querySelector(`#location-${this.id}`)
 
         locationElement.querySelector('.title').innerText = name
-        locationElement.querySelector('.lat').innerText = lat
-        locationElement.querySelector('.lon').innerText = lon
+        locationElement.querySelector('.lat').innerText = "Latitude: " + lat
+        locationElement.querySelector('.lon').innerText = "Longitude: " + llon
     }
 
     fullRender() {
-        const title = document.createElement('h3')
-        title.innerText = this.name
-        title.classList.add('title')
-        const latitude = document.createElement('span')
-        latitude.innerText = this.lat
-        latitude.classList.add('lat')
-        const longitude = document.createElement('span')
-        longitude.innerText = this.lon
-        longitude.classList.add('lon')
-
-        const deleteBtn = document.createElement('button')
-        deleteBtn.classList.add('delete')
-        deleteBtn.dataset.id = this.id
-        deleteBtn.innerText = "x"
-
-        const updateBtn = document.createElement('button')
-        updateBtn.classList.add('update')
-        updateBtn.dataset.id = this.id
-        updateBtn.innerText = 'Update'
-
-        this.element.appendChild(title)
-        this.element.appendChild(latitude)
-        this.element.appendChild(longitude)
-
-        this.element.appendChild(deleteBtn)
-        this.element.appendChild(updateBtn)
+        this.element.innerHTML = `
+        <h3 class="title">${this.name}</h3>
+        <span class="lat">Latitude: ${this.lat}</span>
+        <span class="lon">Longitude: ${this.lon}</span>
+        <button class="delete" data-id="${this.id}">x</button>
+        <button class="update" data-id="${this.id}">Update</button>
+        <span class="updated_at">(${this.updated_at})</span>
+    `
 
         const tripCollection = document.querySelector('#trip-column')
         tripCollection.classList.toggle('trip-collection-toggle')
