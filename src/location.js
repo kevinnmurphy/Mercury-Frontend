@@ -10,20 +10,18 @@ class Location {
 
         this.element = document.createElement('div')
         this.element.id = `location-${id}`
+        this.element.classList.add('locations')
 
-        this.locationCollection = document.querySelector('#location-collection')
+        this.locationCollection = document.querySelector('#location-list')
 
         Location.all.push(this)
     }
 
 
-    addEventListeners() {
-        this.element.addEventListener('click', this.handleClick)
+    static findById(id) {
+        return Location.all.find((location) => location.id == id)
     }
 
-    static findById(id) {
-        return Trip.all.find((trip) => trip.id == id)
-    }
 
     handleClick = (e) => {
         if (e.target.className === 'delete') {
@@ -40,18 +38,6 @@ class Location {
         }
     }
 
-    updatelocationOnDom({name, lat, lon}) {
-        this.name = name
-        this.lat = lat
-        this.lon = lon
-
-        let locationElement = document.querySelector(`#location-${this.id}`)
-
-        locationElement.querySelector('.title').innerText = name
-        locationElement.querySelector('.lat').innerText = lat
-        locationElement.querySelector('.lon').innerText = lon
-    }
-
     addUpdateLocationFields() {
         const updateForm = 
         `
@@ -66,6 +52,18 @@ class Location {
         this.element.append(formDiv)
     }
 
+    updateLocationOnDom({name, lat, lon}) {
+        this.name = name
+        this.lat = lat
+        this.lon = lon
+        // this.trip_id = trip_id
+
+        let locationElement = document.querySelector(`#location-${this.id}`)
+
+        locationElement.querySelector('.title').innerText = name
+        locationElement.querySelector('.lat').innerText = lat
+        locationElement.querySelector('.lon').innerText = lon
+    }
 
     fullRender() {
         const title = document.createElement('h3')
@@ -81,7 +79,7 @@ class Location {
         const deleteBtn = document.createElement('button')
         deleteBtn.classList.add('delete')
         deleteBtn.dataset.id = this.id
-        deleteBtn.innerText = "Delete"
+        deleteBtn.innerText = "x"
 
         const updateBtn = document.createElement('button')
         updateBtn.classList.add('update')
@@ -89,15 +87,14 @@ class Location {
         updateBtn.innerText = 'Update'
 
         this.element.appendChild(title)
-        this.element.appendChild(lat)
-        this.element.appendChild(lon)
+        this.element.appendChild(latitude)
+        this.element.appendChild(longitude)
 
         this.element.appendChild(deleteBtn)
         this.element.appendChild(updateBtn)
-        
-        locationBtn.addEventListener("click", () => {
-            locationFormConatainer.classList.toggle('d-none')
-        })
+
+        const tripCollection = document.querySelector('#trip-column')
+        tripCollection.classList.toggle('trip-collection-toggle')
 
         return this.element
     }
@@ -108,6 +105,6 @@ class Location {
     }
 
     addEventListeners() {
-        // this.element.addEventListeners('click', this.displayLocations)
+        this.element.addEventListener('click', this.handleClick)
     }
 }

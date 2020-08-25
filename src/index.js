@@ -8,8 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
     tripAdapter.fetchTrips()
     locationAdapter.fetchLocations()
     tripForm.addEventListener('submit', handleFormSubmit)
+    // tripForm.addEventListener('submit', new Trip.handleFormSubmit)
     locationForm.addEventListener('submit', handleFormSubmitLocation)
     formToggle()
+    formToggleLocation()
 })
 
 function handleFormSubmit(e) {
@@ -37,11 +39,14 @@ function formToggle() {
 
 function handleFormSubmitLocation(e) {
     e.preventDefault()
-
+    debugger
     const name  = locationForm.querySelector('input[name="name"]').value
     const lat = locationForm.querySelector('input[name="lat"]').value
     const lon = locationForm.querySelector('input[name="lon"]').value
-    const trip_id = e.target.parentNode.id
+    const trip_id = locationForm.querySelector('input[name="trip_id"]').value
+    // const trip_id = e.target.parentNode.id
+
+    //need a good way to tie the trip_id to the selected trip
 
     let formData = {
         name,
@@ -49,6 +54,8 @@ function handleFormSubmitLocation(e) {
         lon,
         trip_id
       }
+
+    // debugger
 
     locationAdapter.createLocation(formData)
     locationForm.reset()

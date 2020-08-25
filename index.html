@@ -26,49 +26,58 @@
 
     <main class="row">
 
-        <div id="trip-collection" class="trip-collection-toggle, col">
+        <div id="trip-column" class="trip-collection-toggle, col">
 
             <div id="col-header">
                 <h2>Trips:</h2>
-                <button id="new-trip-btn">Add Trip</button>
-    
-            </div>
 
-            <form id="trip-form" class="d-none">
-                <!-- <label for="trip-name">Name:</label> -->
-                <input type="text" name="name" id="trip-name" placeholder="Name">
-                <!-- <label for="trip-description">Description:</label> -->
-                <input type="text" name="description" id="trip-description" placeholder="Description">
-    
-                <input type="submit" value="Create">
-    
-            </form>
+                <button id="new-trip-btn">Add Trip</button>
+
+                <form id="trip-form" class="d-none">
+                    <!-- <label for="trip-name">Name:</label> -->
+                    <input type="text" name="name" id="trip-name" placeholder="Name">
+                    <!-- <label for="trip-description">Description:</label> -->
+                    <input type="text" name="description" id="trip-description" placeholder="Description">
+        
+                    <input type="submit" value="Create">
+                </form>
+            </div>
 
         </div>
 
 
         
-        <div id="location-collection" class="col">
+        <div id="location-column" class="col">
 
             <div id="col-header">
                 <h2>Locations:</h2>
+
                 <button id="new-location-btn">Add Location</button>
     
+                <form id="location-form" class="d-none">
+                    <h3>Add new Location</h3>
+                    <!-- <label for="location-name">Name:</label> -->
+                    <input type="text" name="name" id="location-name" placeholder="Name"><br>
+                    <!-- <label for="location-lat">Lat:</label> -->
+                    <input type="text" name="lat" id="location-lat" placeholder="Lat"><br>
+                    <!-- <label for="location-lon">Lon:</label> -->
+                    <input type="text" name="lon" id="location-lon" placeholder="Lon"><br>
+
+                    <select type="select" name="location[trip_id]" id="location_trip_id" placeholder="Search Trips...">
+                        <option value="">Select a trip</option>
+                        <option value="1">Saturday</option>
+                        <option value="2">Sunday</option>
+                    </select>
+                    <br>
+        
+                    <input type="submit" value="Create">
+                </form>
             </div>
 
-            <form id="location-form" class="d-none">
-                <h3>Add new Location</h3>
-                <!-- <label for="location-name">Name:</label> -->
-                <input type="text" name="name" id="location-name" placeholder="Name"><br>
-                <!-- <label for="location-lat">Lat:</label> -->
-                <input type="text" name="lat" id="location-lat" placeholder="Lat"><br>
-                <!-- <label for="location-lon">Lon:</label> -->
-                <input type="text" name="lon" id="location-lon" placeholder="Lon"><br>
-    
-                <input type="submit" value="Create">
-    
-            </form>
+            <div id="location-list"></div>
 
+
+            
         </div>
 
 

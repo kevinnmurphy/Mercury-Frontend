@@ -51,7 +51,6 @@ class LocationAdapter{
         fetch(`${baseUrl}/locations/${locationId}`, config)
             .then(res => res.json())
             .then(json => {
-                
                 let locationNew  = Location.all.find((i) => i.id == json.data.id)
                 locationNew.updateLocationOnDom({...json.data.attributes}) 
             })

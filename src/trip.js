@@ -12,17 +12,12 @@ class Trip {
         this.element.id = `trip-${id}`
         this.element.classList.add('trips')
 
-        this.tripCollection = document.querySelector('#trip-collection')
-        this.locationCollection = document.querySelector('#location-collection')
+        this.tripCollection = document.querySelector('#trip-column')
+        this.locationCollection = document.querySelector('#location-list')
 
         Trip.all.push(this)
     }
-    
-    addEventListeners() {
-        this.element.addEventListener('click', this.handleClick)
-        this.element.addEventListener('click', this.displayLocations)
-        // debugger
-    }
+
 
     static findById(id) {
         return Trip.all.find((trip) => trip.id == id)
@@ -33,9 +28,10 @@ class Trip {
         options = {weekday: 'short', month: 'short', day: 'numeric' }
     }
 
-    get locations() {
+    locations() {
        return Location.all.filter((location) => location.trip_id == this.id)
     }
+
 
     handleClick = (e) => {
         if (e.target.className === 'delete') {
@@ -52,18 +48,6 @@ class Trip {
         }
     }
 
-    updateTripOnDom({name, description, updated_at}) {
-        this.name = name
-        this.description = description
-        this.updated_at = updated_at
-
-        let tripElement = document.querySelector(`#trip-${this.id}`)
-
-        tripElement.querySelector('.title').innerText = name
-        tripElement.querySelector('.description').innerText = description
-        tripElement.querySelector('.updated_at').innerText = updated_at
-    }
-
     addUpdateTripFields() {
         const updateForm = 
         `
@@ -75,6 +59,18 @@ class Trip {
         formDiv.id = `update-form-${this.id}`
         formDiv.innerHTML = updateForm
         this.element.append(formDiv)
+    }
+
+    updateTripOnDom({name, description, updated_at}) {
+        this.name = name
+        this.description = description
+        this.updated_at = updated_at
+
+        let tripElement = document.querySelector(`#trip-${this.id}`)
+
+        tripElement.querySelector('.title').innerText = name
+        tripElement.querySelector('.description').innerText = description
+        tripElement.querySelector('.updated_at').innerText = updated_at
     }
     
     // createDeleteButton(el) {
@@ -112,7 +108,7 @@ class Trip {
 
         // element.addEventListener('click', this.locationToggle)
 
-        const tripCollection = document.querySelector('#trip-collection')
+        const tripCollection = document.querySelector('#trip-column')
         tripCollection.classList.toggle('trip-collection-toggle')
 
         return this.element
@@ -120,16 +116,23 @@ class Trip {
 
     attachToDom() {
         this.tripCollection.append(this.fullRender())
-        // debugger
         this.addEventListeners()
     }
 
+    addEventListeners() {
+        this.element.addEventListener('click', this.handleClick) 
+        // prevent filter propogation
+        // event.stopPropagation()
+        this.element.addEventListener('click', this.displayLocations)
+    }
 
 
-    displayLocations () {() =>
-        console.log('display locations clicked')
-        this.locations.forEach((i) => {
-            i.attachLToDom()
+    displayLocations = () => {
+        const locationList = document.querySelector('#location-list')
+        locationList.innerHTML = ''
+        debugger
+        Trip.findById(this.id).locations().forEach((i) => {
+            i.attachToDom()
         })
     }
 
@@ -156,4 +159,31 @@ class Trip {
         })
     }
 
+
+    // handleFormSubmit(e) {
+    //     e.preventDefault()
+    //     const tripForm = document.querySelector('#trip-form')
+    //     const locationForm = document.querySelector('#location-form')
+    
+    //     const name  = tripForm.querySelector('input[name="name"]').value
+    //     const description = tripForm.querySelector('input[name="description"]').value
+    
+    //     let formData = {
+    //         name,
+    //         description
+    //     }
+    
+    //     tripAdapter.createTrip(formData)
+    //     tripForm.reset()
+    // }
+    
+    // formToggle() {
+    //     const tripBtn = document.querySelector('#new-trip-btn')
+    //     const tripForm = document.querySelector('#trip-form')
+    //     const locationForm = document.querySelector('#location-form')
+    
+    //     tripBtn.addEventListener("click", () => {
+    //         tripForm.classList.toggle('d-none')
+    //     })
+    // }
 }

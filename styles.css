@@ -3,11 +3,6 @@
     justify-content: space-between;
 }
 .flex-grid-thirds .col {
-    width: 32%;
-}
-
-.column {
-    float:left;
     width: 33.33%;
 }
 
@@ -15,6 +10,16 @@
     content: "";
     display: table;
     clear: both;
+}
+
+/* splits screen for map display  */
+/* .d-non-map {
+    
+    display: inline-block;
+} */
+
+.d-none{
+    display: none;
 }
 
 header {
@@ -34,9 +39,7 @@ h2 {
 }
 
 body {
-    margin: 0;
     font-family: 'Baloo Tamma 2', cursive;
-    grid-template-rows: auto 1fr auto;
 }
 
 button {
@@ -49,10 +52,10 @@ button:hover {
 
 #col-header {
     display: flex;
-    flex: 1 0 150px;
+    flex: 0 1 100%;
     flex-wrap: wrap;
     flex-direction: column;
-    /* justify-content: center; */
+    justify-content: center;
 }
 
 .delete {
@@ -64,16 +67,7 @@ button:hover {
     color: gray;
 }
 
-.d-non-map {
-    /* splits screen for map display */
-    display: inline-block;
-}
-
-.d-none{
-    display: none;
-}
-
-#new-trip-btn {
+#new-trip-btn, #new-location-btn {
     margin: 10px;
 }
 
@@ -86,7 +80,9 @@ button:hover {
     margin: 10px;
 }
 
-#trip-collection, #location-collection{
+/* FIX THIS COLUMN MESS */
+
+#trip-column, #location-column, #location-list{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

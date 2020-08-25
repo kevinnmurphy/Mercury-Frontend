@@ -53,7 +53,6 @@ class TripAdapter{
         fetch(`${baseUrl}/trips/${tripId}`, config)
             .then(res => res.json())
             .then(json => {
-                
                 let tripNew  = Trip.all.find((i) => i.id == json.data.id)
                 tripNew.updateTripOnDom({...json.data.attributes}) 
             })
