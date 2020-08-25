@@ -22,43 +22,60 @@
 
     <header>
         <h1>Welcome to the Mercurial App</h1>
-        <button id="new-trip-btn">Add Trip</button>
     </header>
 
-    <main>
+    <main class="row">
 
-        <h2>Trips:</h2>
+        <div id="trip-collection" class="trip-collection-toggle, col">
 
-        <form id="trip-form" class="d-none">
-            <h3>Add new Trip</h3>
-            <!-- <label for="trip-name">Name:</label> -->
-            <input type="text" name="name" id="trip-name" placeholder="Name">
-            <!-- <label for="trip-description">Description:</label> -->
-            <input type="text" name="description" id="trip-description" placeholder="Description">
+            <div id="col-header">
+                <h2>Trips:</h2>
+                <button id="new-trip-btn">Add Trip</button>
+    
+            </div>
 
-            <input type="submit" value="Create">
-
-        </form>
-
-        <div id="trip-collection">
+            <form id="trip-form" class="d-none">
+                <!-- <label for="trip-name">Name:</label> -->
+                <input type="text" name="name" id="trip-name" placeholder="Name">
+                <!-- <label for="trip-description">Description:</label> -->
+                <input type="text" name="description" id="trip-description" placeholder="Description">
+    
+                <input type="submit" value="Create">
+    
+            </form>
 
         </div>
 
 
         
+        <div id="location-collection" class="col">
 
-        <form id="location-form" class="d-none">
-            <h3>Add new Location</h3>
-            <label for="location-name">Name:</label>
-            <input type="text" name="name" id="location-name"><br>
-            <label for="location-lat">Lat:</label>
-            <input type="text" name="lat" id="location-lat"><br>
-            <label for="location-lon">Lon:</label>
-            <input type="text" name="lon" id="location-lon"><br>
+            <div id="col-header">
+                <h2>Locations:</h2>
+                <button id="new-location-btn">Add Location</button>
+    
+            </div>
 
-            <input type="submit" value="Create">
+            <form id="location-form" class="d-none">
+                <h3>Add new Location</h3>
+                <!-- <label for="location-name">Name:</label> -->
+                <input type="text" name="name" id="location-name" placeholder="Name"><br>
+                <!-- <label for="location-lat">Lat:</label> -->
+                <input type="text" name="lat" id="location-lat" placeholder="Lat"><br>
+                <!-- <label for="location-lon">Lon:</label> -->
+                <input type="text" name="lon" id="location-lon" placeholder="Lon"><br>
+    
+                <input type="submit" value="Create">
+    
+            </form>
 
-        </form>
+        </div>
+
+
+
+        <div id="map" class="col">
+
+        </div>
 
     </main>
 
