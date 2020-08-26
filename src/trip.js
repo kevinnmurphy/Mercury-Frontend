@@ -2,12 +2,11 @@ class Trip {
     static all = []
     static selected = {}
 
-    constructor({id, name, description, updated_at, locations}){
+    constructor({id, name, description, updated_at}){
         this.id = id
         this.name = name
         this.description = description
         this.updated_at = updated_at
-        // this.locations = locations
 
         this.element = document.createElement('div')
         this.element.id = `trip-${id}`
@@ -39,7 +38,6 @@ class Trip {
 
 
     handleClick = (e) => {
-        //stop propogation, not working
         // e.stopPropagation()
         if (e.target.className === 'delete') {
             tripAdapter.deleteTrip(this.id)
@@ -52,6 +50,8 @@ class Trip {
             e.target.className = "update"
             e.target.innerText = "Update"
             tripAdapter.patchTrip(this.id)
+        } else {
+            this.displayLocations(e)
         }
     }
 
@@ -102,7 +102,7 @@ class Trip {
 
     addEventListeners() {
         this.element.addEventListener('click', this.handleClick) 
-        this.element.addEventListener('click', this.displayLocations)
+        // this.element.addEventListener('click', this.displayLocations)
     }
 
 

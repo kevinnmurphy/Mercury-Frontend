@@ -80,8 +80,6 @@ button:hover {
     margin: 10px;
 }
 
-/* FIX THIS COLUMN MESS */
-
 #trip-column, #location-column, #map-column{
     flex-direction: column;
     flex-wrap: wrap;

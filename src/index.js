@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     tripAdapter.fetchTrips()
     locationAdapter.fetchLocations()
     tripForm.addEventListener('submit', handleFormSubmit)
-    // tripForm.addEventListener('submit', new Trip.handleFormSubmit)
     locationForm.addEventListener('submit', handleFormSubmitLocation)
     formToggle()
     formToggleLocation()
@@ -51,14 +50,11 @@ function handleFormSubmitLocation(e) {
         lat,
         lon,
         trip_id
-      }
-
-    //need a good way to tie the trip_id to the selected trip
-    // debugger
+    }
 
     locationAdapter.createLocation(formData)
 
-    // locationForm.reset()
+    locationForm.reset()
 }
 
 function formToggleLocation() {
@@ -66,10 +62,6 @@ function formToggleLocation() {
     locationBtn.toggleAttribute('disabled')
 
     locationBtn.addEventListener("click", () => {
-
-        // test obj create on click
-        locationAdapter.createLocation({name: "Test3", lat: "40", lon: "40", trip_id: "11"})
-
         locationForm.classList.toggle('d-none')
     })
 }
