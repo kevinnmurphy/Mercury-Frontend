@@ -34,6 +34,8 @@ class Trip {
 
 
     handleClick = (e) => {
+        //stop propogation, not working
+        // e.stopPropagation()
         if (e.target.className === 'delete') {
             tripAdapter.deleteTrip(this.id)
             this.element.remove()
@@ -95,18 +97,19 @@ class Trip {
 
     addEventListeners() {
         this.element.addEventListener('click', this.handleClick) 
-        // prevent filter propogation
-        // event.stopPropagation()
         this.element.addEventListener('click', this.displayLocations)
     }
 
 
-    displayLocations = () => {
+    displayLocations = (event) => {
         const locationList = document.querySelector('#location-list')
         locationList.innerHTML = ''
         Trip.findById(this.id).locations().forEach((i) => {
             i.attachToDom()
         })
+
+        const locationBtn = document.querySelector('#new-location-btn')
+        locationBtn.toggleAttribute('disabled', false)
     }
 
     locationToggle() {

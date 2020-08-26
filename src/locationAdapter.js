@@ -7,7 +7,7 @@ class LocationAdapter{
         fetch(`${baseUrl}/locations`)
             .then(res => res.json())
             .then(json => {
-                json.data.forEach((location) => this.sanitizeAndAdd(location))
+                json.data.forEach((location) => this.sanitize(location))
             })
             .catch((err) => console.log(err.message))
     }
@@ -72,6 +72,10 @@ class LocationAdapter{
             .then(res => res.json())
             .then(json => alert(json.message))
             .catch((err) => console.log(err.message))
+    }
+
+    sanitize(res) {
+        let location = new Location({id: res.id, ...res.attributes, trip_id: res.relationships.trip.data.id})
     }
 
     sanitizeAndAdd(res) {

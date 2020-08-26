@@ -61,15 +61,18 @@
                     <!-- <label for="location-name">Name:</label> -->
                     <input type="text" name="name" id="location-name" placeholder="Name"><br>
                     <!-- <label for="location-lat">Lat:</label> -->
-                    <input type="text" name="lat" id="location-lat" placeholder="Lat"><br>
+                    <input type="text" name="lat" id="location-lat" placeholder="Lat">
                     <!-- <label for="location-lon">Lon:</label> -->
                     <input type="text" name="lon" id="location-lon" placeholder="Lon"><br>
 
-                    <select type="select" name="location[trip_id]" id="location_trip_id" placeholder="Search Trips...">
+                    <input type="hidden" name="trip_id" id="location_trip_id">
+
+                    <!-- <select type="select" name="location[trip_id]" id="location_trip_id" placeholder="Search Trips...">
                         <option value="">Select a trip</option>
                         <option value="1">Saturday</option>
                         <option value="2">Sunday</option>
-                    </select>
+                    </select> -->
+
                     <br>
         
                     <input type="submit" value="Create">
@@ -85,7 +88,10 @@
 
 
         <div id="map" class="col">
-
+            <div id="col-header">
+                <h2>Map:</h2>
+    
+            </div>
         </div>
 
     </main>

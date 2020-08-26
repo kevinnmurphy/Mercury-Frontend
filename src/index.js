@@ -46,6 +46,7 @@ function handleFormSubmitLocation(e) {
     const trip_id = locationForm.querySelector('input[name="trip_id"]').value
     // const trip_id = e.target.parentNode.id
 
+    debugger
     //need a good way to tie the trip_id to the selected trip
 
     let formData = {
@@ -67,6 +68,7 @@ function handleFormSubmitLocation(e) {
 
 function formToggleLocation() {
     const locationBtn = document.querySelector('#new-location-btn')
+    locationBtn.toggleAttribute('disabled')
 
     locationBtn.addEventListener("click", () => {
         locationForm.classList.toggle('d-none')
