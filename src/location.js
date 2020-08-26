@@ -43,8 +43,8 @@ class Location {
         const updateForm = 
         `
         <input type="text" name="name" id="location-name" value="${this.name}"<br>
-        <input type="text" name="description" id="location-description" value="${this.lat}"><br>
-        <input type="text" name="description" id="location-description" value="${this.lon}"><br>
+        <input type="text" name="lat" id="location-lat" value="${this.lat}"><br>
+        <input type="text" name="lon" id="location-lon" value="${this.lon}"><br>
         `
 
         const formDiv = document.createElement('div')
@@ -58,12 +58,12 @@ class Location {
         this.lat = lat
         this.lon = lon
         // this.trip_id = trip_id
-
+        
         let locationElement = document.querySelector(`#location-${this.id}`)
 
         locationElement.querySelector('.title').innerText = name
         locationElement.querySelector('.lat').innerText = "Latitude: " + lat
-        locationElement.querySelector('.lon').innerText = "Longitude: " + llon
+        locationElement.querySelector('.lon').innerText = "Longitude: " + lon
     }
 
     fullRender() {

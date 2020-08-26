@@ -1,5 +1,6 @@
 class Trip {
     static all = []
+    static selected = {}
 
     constructor({id, name, description, updated_at, locations}){
         this.id = id
@@ -26,6 +27,10 @@ class Trip {
     get updatedAt() {
         new Date(Date.UTC(this.updated_at.innerText) * 1000),
         options = {weekday: 'short', month: 'short', day: 'numeric' }
+    }
+
+    static currentTrip(trip) {
+        return Trip.selected = trip
     }
 
     locations() {
@@ -101,38 +106,18 @@ class Trip {
     }
 
 
-    displayLocations = (event) => {
+    displayLocations = (e) => {
+        const locationBtn = document.querySelector('#new-location-btn')
+        locationBtn.toggleAttribute('disabled', false)
+
         const locationList = document.querySelector('#location-list')
         locationList.innerHTML = ''
         Trip.findById(this.id).locations().forEach((i) => {
             i.attachToDom()
         })
-
-        const locationBtn = document.querySelector('#new-location-btn')
-        locationBtn.toggleAttribute('disabled', false)
-    }
-
-    locationToggle() {
-
-        const locationList = document.createElement('ul')
-        locationList.classList.add('locationList')
-        locationList.classList.add('d-none')
-        // locationItem.dataset.id = this.id
-
         
-
-        const locationBtn = document.querySelector('.locationBtn')
-        locationBtn.classList.toggle('d-none')
-
-        // Toggles trip collection from row to column
-        // const tripCollection = document.querySelector('#trip-collection')
-        // tripCollection.classList.toggle('trip-collection-toggle')
-
-        // this.tripCollection.append(this.locationRender())
-        // this.addEventListeners()
-        locationBtn.addEventListener("click", () => {
-            locationForm.classList.toggle('d-none')
-        })
+        Trip.currentTrip(Trip.findById(this.id))
     }
+
 
 }

@@ -21,6 +21,7 @@ class TripAdapter{
                 'Accept': 'application/json'
             }
         }
+        
         fetch(`${baseUrl}/trips`, config)
             .then(res => res.json())
             .then(json => {

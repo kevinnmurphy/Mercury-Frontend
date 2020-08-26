@@ -21,24 +21,32 @@ class LocationAdapter{
                 'Accept': 'application/json'
             }
         }
+
         fetch(`${baseUrl}/locations`, config)
-            .then(res => res.json())
+            .then(res => {
+                debugger
+                return res.json()
+            })
             .then(json => {
+                debugger
                 return this.sanitizeAndAdd(json.data)
             })
             .catch((err) => console.log(err.message))
     }
-      
+ 
     patchLocation(locationId) {
         const form = document.querySelector(`#update-form-${locationId}`)
+        
         const name = form.querySelector('#location-name').value
-        const description = form.querySelector('#location-description').value
+        const lat = form.querySelector('#location-lat').value
+        const lon = form.querySelector('#location-lon').value
         
         let locationObj = {
             name,
-            description
+            lat,
+            lon
         }
-
+        
         let config = {
             method: 'PATCH',
             headers: {

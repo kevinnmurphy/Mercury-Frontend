@@ -39,15 +39,12 @@ function formToggle() {
 
 function handleFormSubmitLocation(e) {
     e.preventDefault()
-    debugger
-    const name  = locationForm.querySelector('input[name="name"]').value
-    const lat = locationForm.querySelector('input[name="lat"]').value
-    const lon = locationForm.querySelector('input[name="lon"]').value
-    const trip_id = locationForm.querySelector('input[name="trip_id"]').value
-    // const trip_id = e.target.parentNode.id
 
-    debugger
-    //need a good way to tie the trip_id to the selected trip
+    const name = document.querySelector('#location-name').value
+    const lat = document.querySelector('#location-lat').value
+    const lon = document.querySelector('#location-lon').value
+   
+    const trip_id = `${Trip.selected.id}`
 
     let formData = {
         name,
@@ -56,14 +53,12 @@ function handleFormSubmitLocation(e) {
         trip_id
       }
 
+    //need a good way to tie the trip_id to the selected trip
     // debugger
 
     locationAdapter.createLocation(formData)
-    locationForm.reset()
 
-    // const location = document.querySelector('#location-name')
-    // const lat = document.querySelector('#location-lat')
-    // const lon = document.querySelector('#location-lon')
+    // locationForm.reset()
 }
 
 function formToggleLocation() {
@@ -71,6 +66,10 @@ function formToggleLocation() {
     locationBtn.toggleAttribute('disabled')
 
     locationBtn.addEventListener("click", () => {
+
+        // test obj create on click
+        locationAdapter.createLocation({name: "Test3", lat: "40", lon: "40", trip_id: "11"})
+
         locationForm.classList.toggle('d-none')
     })
 }
