@@ -43,8 +43,8 @@ class Location {
         const updateForm = 
         `
         <input type="text" name="name" id="location-name" value="${this.name}"<br>
-        <input type="text" name="lat" id="location-lat" value="${this.lat}"><br>
-        <input type="text" name="lon" id="location-lon" value="${this.lon}"><br>
+        <input type="number" name="lat" id="location-lat" value="${this.lat}" step="0.01"><br>
+        <input type="number" name="lon" id="location-lon" value="${this.lon}" step="0.01"><br>
         `
 
         const formDiv = document.createElement('div')
