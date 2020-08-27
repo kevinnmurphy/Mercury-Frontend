@@ -12,12 +12,6 @@
     clear: both;
 }
 
-/* splits screen for map display  */
-/* .d-non-map {
-    
-    display: inline-block;
-} */
-
 .d-none{
     display: none;
 }
@@ -71,11 +65,6 @@ button:hover {
     margin: 10px;
 }
 
-.locationBtn {
-
-    margin: 10px;
-}
-
 #trip-form {
     margin: 10px;
 }
@@ -95,7 +84,7 @@ button:hover {
     width: 33%;
 } */
 
-.trips, .locations{
+.trips, .locations, .map {
     background: rgba(200, 200, 200, 10);
     margin: 10px;
     display: flex;
@@ -119,3 +108,14 @@ button:hover {
 .updated_at {
     font-size: .6em;
 }
+
+#map {
+    height: 80vh;
+    width: 100%;
+    /* height: 600px;  */
+  }
+
+  .fixed {
+      position: sticky;
+      
+  }
