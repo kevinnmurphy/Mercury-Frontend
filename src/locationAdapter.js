@@ -24,11 +24,9 @@ class LocationAdapter{
 
         fetch(`${baseUrl}/locations`, config)
             .then(res => {
-                debugger
                 return res.json()
             })
             .then(json => {
-                debugger
                 return this.sanitizeAndAdd(json.data)
             })
             .catch((err) => console.log(err.message))
