@@ -34,8 +34,6 @@ class TripAdapter{
         const form = document.querySelector(`#update-form-${tripId}`)
         const name = form.querySelector('#trip-name').value
         const description = form.querySelector('#trip-description').value
-        // const name = document.querySelector(`trip-name-${id}`).value
-        // const description = document.querySelector(`trip-description-${id}`).value
         
         let tripObj = {
             name,
