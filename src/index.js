@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     tripForm.addEventListener('submit', handleFormSubmit)
     locationForm.addEventListener('submit', handleFormSubmitLocation)
     formToggle()
-    formToggleLocation()
+    formToggleLocation() 
 })
 
 function handleFormSubmit(e) {
