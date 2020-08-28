@@ -16,6 +16,13 @@
         <link rel="stylesheet" href="styles.css">
         <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&display=swap" rel="stylesheet">
 
+
+        <!-- <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script> -->
+        <script
+          src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPJpjD-qcR_yIxJnS8maR5W9KB0E3EzYI&callback=initMap&libraries=&v=weekly"
+          defer
+        ></script>
+
     </head>
 
     <body>
@@ -61,11 +68,9 @@
                     <!-- <label for="location-name">Name:</label> -->
                     <input type="text" name="name" id="location-name" placeholder="Name"><br>
                     <!-- <label for="location-lat">Lat:</label> -->
-                    <input type="text" name="lat" id="location-lat" placeholder="Lat">
+                    <input type="number" name="lat" id="location-lat" placeholder="Lat" step="0.01">
                     <!-- <label for="location-lon">Lon:</label> -->
-                    <input type="text" name="lon" id="location-lon" placeholder="Lon"><br>
-
-                    <!-- <input type="hidden" name="trip_id" id="location_trip_id" value="${Trip.selected}"> -->
+                    <input type="number" name="lon" id="location-lon" placeholder="Lon" step="0.01"><br>
 
                     <!-- <select type="select" name="location[trip_id]" id="location_trip_id" placeholder="Search Trips...">
                         <option value="">Select a trip</option>
@@ -87,11 +92,15 @@
 
 
 
-        <div id="map" class="col">
+        <div id="map-column" class="col">
             <div id="col-header">
                 <h2>Map:</h2>
-    
             </div>
+            <div id="map" class="map"></div>
+            <div id="warnings-panel"></div>
+            
+            <!-- Directions panel -->
+            <!-- <div id="directionsPanel" class="map"></div> -->
         </div>
 
     </main>
@@ -107,12 +116,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
   </body>
 
-    
-
     <script type="application/javascript" src="src/trip.js" charset="UTF-8"></script>
     <script type="application/javascript" src="src/tripAdapter.js" charset="UTF-8"></script>
     <script type="application/javascript" src="src/location.js" charset="UTF-8"></script>
     <script type="application/javascript" src="src/locationAdapter.js" charset="UTF-8"></script>
+    <script type="application/javascript" src="src/map.js" charset="UTF-8"></script>
     <script type="application/javascript" src="src/index.js" charset="UTF-8"></script>
 
 </html>
