@@ -52,6 +52,15 @@ class Trip {
             tripAdapter.patchTrip(this.id)
         } else {
             this.displayLocations(e)
+            // debugger
+            markers = []
+
+            Trip.selected.locations().forEach((location) => {
+                let point = {lat: parseFloat(location.lat), lng: parseFloat(location.lon)}
+                markers.push(point)
+            })
+            
+            initMap(markers[0])
         }
     }
 
