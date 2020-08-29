@@ -52,7 +52,7 @@ class Trip {
             tripAdapter.patchTrip(this.id)
         } else {
             this.displayLocations(e)
-            // debugger
+            
             markers = []
 
             Trip.selected.locations().forEach((location) => {

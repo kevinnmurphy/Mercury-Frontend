@@ -4,11 +4,14 @@ let directionsService;
 let directionsRenderer;
 
 // let markers = [{lat: 33.70, lng: -84.40}, {lat: 34.70, lng: -84.40}, {lat: 34.00, lng: -84.40}]
-let markers = []
+let markers = [{lat: 38.90, lng: -77.03}]
 
 function last(array) { 
     return last_element = array[array.length - 1]
 }
+
+
+// calcDifference(Object.values(markers[0]), Object.values(markers[1]))
 
 function initMap(center = markers[0]) {
   const markerArray = []
@@ -44,7 +47,7 @@ function initMap(center = markers[0]) {
     )
   }
 
-  // document.getElementById("sort").addEventListener("change", onChangeHandler);
+  // document.getElementById("sort").addEventListener("click", onChangeHandler);
 
 //   document.getElementById("start").addEventListener("change", onChangeHandler);
 //   document.getElementById("end").addEventListener("change", onChangeHandler);
@@ -56,28 +59,47 @@ function calculateAndDisplayRoute(directionsRenderer, directionsService, markerA
     markerArray[i].setMap(null);
   }
   
-  let newWaypoints = []
-
-  if (markers.length > 2) {
-    for (let i = 1; i < markers.length; i++) {
-      let waypoint = {location: markers[i], stopover: true}
-      newWaypoints.push(waypoint) 
-    }
-    newWaypoints
-  }
-
   // waypoints: [
   //   {
   //     location: markers[0],
   //     stopover: true
   //   }]
+  
+
+  //sort by distance
+  let coordinates = [...markers]
+
+  const distance = (coor1, coor2) => {
+    const x = coor2.lat - coor1.lat;
+    const y = coor2.lng - coor1.lng;
+    return Math.sqrt((x*x) + (y*y));
+  }
+
+  const sortByDistance = (coordinates, point) => {
+    const sorter = (a, b) => distance(a, point) - distance(b, point)
+    coordinates.sort(sorter)
+  }
+
+  sortByDistance(coordinates, coordinates[0])
+
+  //add waypoints after first and before last
+  let newWaypoints = []
+
+  if (coordinates.length > 2) {
+    for (let i = 1; i < coordinates.length - 1; i++) {
+      let waypoint = {location: coordinates[i], stopover: true}
+      newWaypoints.push(waypoint) 
+    }
+    newWaypoints
+  }
+
 
   directionsService.route(
     {
     //   origin: document.getElementById("start").value,
     //   destination: document.getElementById("end").value,
-      origin: markers[0],
-      destination: last(markers),
+      origin: coordinates[0],
+      destination: last(coordinates),
       waypoints: newWaypoints,
       travelMode: google.maps.TravelMode.DRIVING
     },
