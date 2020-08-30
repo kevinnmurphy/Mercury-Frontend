@@ -76,9 +76,6 @@ class Location {
         <span class="updated_at">(${this.updated_at})</span>
     `
 
-        const tripCollection = document.querySelector('#trip-column')
-        tripCollection.classList.toggle('trip-collection-toggle')
-
         return this.element
     }
 

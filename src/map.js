@@ -18,12 +18,40 @@ function initMap(center = markers[0]) {
 
   const directionsService = new google.maps.DirectionsService()
 
-  const map = new google.maps.Map(document.getElementById("map"), {
+  const mapSettings = {
     zoom: 9,
     center: center
-  })
+  }
 
-  const directionsRenderer = new google.maps.DirectionsRenderer({
+  const map = new google.maps.Map(document.getElementById("map"), mapSettings)
+  let clickCoord
+
+  //get click coordinates
+  // google.maps.event.addListener(map, 'click', function(event) {alert(event.latLng)})
+  map.addListener('click', (e) => {
+    // alert(e.latLng)
+    clickCoord = e.latLng.toJSON()
+  })
+  // google.maps.event.addListener(map, 'click', function(event) {clickCoord = event.latLng})
+  map.addListener('click', newLocationCoords)
+
+  //unhide location form
+  //set new location values equal to click
+  function newLocationCoords(e) {
+    if (locationForm.classList.contains('d-none')) {
+      locationForm.classList.toggle('d-none')
+    }
+
+    let name = `Test-${Math.trunc(Math.random()*1000000)}`
+    let lat = clickCoord.lat
+    let lon = clickCoord.lng
+    //set values
+    document.querySelector('#location-name').value = name
+    document.querySelector('#location-lat').value = lat
+    document.querySelector('#location-lon').value = lon
+  }
+
+  directionsRenderer = new google.maps.DirectionsRenderer({
     map: map
   })
 

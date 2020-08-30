@@ -52,7 +52,7 @@ class Trip {
             tripAdapter.patchTrip(this.id)
         } else {
             this.displayLocations(e)
-            
+
             markers = []
 
             Trip.selected.locations().forEach((location) => {
@@ -116,8 +116,7 @@ class Trip {
 
 
     displayLocations = (e) => {
-        const locationBtn = document.querySelector('#new-location-btn')
-        locationBtn.toggleAttribute('disabled', false)
+        this.createLocationToggle()
 
         const locationList = document.querySelector('#location-list')
         locationList.innerHTML = ''
@@ -128,5 +127,8 @@ class Trip {
         Trip.currentTrip(Trip.findById(this.id))
     }
 
-
+    createLocationToggle() {
+        const locationBtn = document.querySelector('#new-location-btn')
+        locationBtn.toggleAttribute('disabled', false)
+    }
 }
