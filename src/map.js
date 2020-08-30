@@ -3,15 +3,11 @@ let service;
 let directionsService;
 let directionsRenderer;
 
-// let markers = [{lat: 33.70, lng: -84.40}, {lat: 34.70, lng: -84.40}, {lat: 34.00, lng: -84.40}]
 let markers = [{lat: 38.90, lng: -77.03}]
 
 function last(array) { 
     return last_element = array[array.length - 1]
 }
-
-
-// calcDifference(Object.values(markers[0]), Object.values(markers[1]))
 
 function initMap(center = markers[0]) {
   const markerArray = []
@@ -26,26 +22,22 @@ function initMap(center = markers[0]) {
   const map = new google.maps.Map(document.getElementById("map"), mapSettings)
   let clickCoord
 
-  //get click coordinates
-  // google.maps.event.addListener(map, 'click', function(event) {alert(event.latLng)})
   map.addListener('click', (e) => {
     // alert(e.latLng)
     clickCoord = e.latLng.toJSON()
   })
-  // google.maps.event.addListener(map, 'click', function(event) {clickCoord = event.latLng})
+
   map.addListener('click', newLocationCoords)
 
-  //unhide location form
-  //set new location values equal to click
   function newLocationCoords(e) {
     if (locationForm.classList.contains('d-none')) {
       locationForm.classList.toggle('d-none')
     }
 
     let name = `Test-${Math.trunc(Math.random()*1000000)}`
-    let lat = clickCoord.lat
-    let lon = clickCoord.lng
-    //set values
+    let lat = parseFloat(clickCoord.lat).toFixed(2)
+    let lon = parseFloat(clickCoord.lng).toFixed(2)
+    //set click values in form
     document.querySelector('#location-name').value = name
     document.querySelector('#location-lat').value = lat
     document.querySelector('#location-lon').value = lon
@@ -120,7 +112,6 @@ function calculateAndDisplayRoute(directionsRenderer, directionsService, markerA
     }
     newWaypoints
   }
-
 
   directionsService.route(
     {
