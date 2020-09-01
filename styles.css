@@ -44,7 +44,7 @@ button:hover {
     background-color: rgba(0,0,0,0.1);
 }
 
-#new-trip-btn, #new-location-btn {
+#new-trip-btn, #new-location-btn, #sort-trip-btn {
     margin: 10px;
 }
 

@@ -1,6 +1,7 @@
 class Trip {
     static all = []
     static selected = {}
+    static sorted = false
 
     constructor({id, name, description, updated_at}){
         this.id = id
@@ -35,7 +36,6 @@ class Trip {
     locations() {
        return Location.all.filter((location) => location.trip_id == this.id)
     }
-
 
     handleClick = (e) => {
         // e.stopPropagation()
@@ -98,8 +98,8 @@ class Trip {
             <span class="updated_at">(${this.updated_at})</span>
         `
 
-        const tripCollection = document.querySelector('#trip-column')
-        tripCollection.classList.toggle('trip-collection-toggle')
+        // const tripCollection = document.querySelector('#trip-column')
+        // tripCollection.classList.toggle('trip-collection-toggle')
 
         return this.element
     }
@@ -131,4 +131,37 @@ class Trip {
         const locationBtn = document.querySelector('#new-location-btn')
         locationBtn.toggleAttribute('disabled', false)
     }
+
+
+    addTripSort() {
+        const sortBtn = document.querySelector('#sort-trip-btn')
+        sortBtn.addEventListener('click', sortTrips)
+    }
+
+    static sortTrips() {
+        const tripCollection = document.querySelector('#trip-list')
+        tripCollection.innerHtml = ""
+        let tripSort = Trip.all.slice()
+        
+        if (Trip.sorted === true) {
+            Trip.all.forEach(trip => trip.attachToDom())
+            return Trip.sorted = false
+        } else {
+            tripSort.sort((a, b) => {
+                var nameA = a.name.toUpperCase()
+                var nameB = b.name.toUpperCase()
+                if (nameA < nameB) {
+                  return -1
+                }
+                if (nameA > nameB) {
+                  return 1
+                }
+                return 0
+            })
+            tripSort.forEach(trip => trip.attachToDom())
+
+            return Trip.sorted = true
+        }
+    }
+
 }

@@ -3,12 +3,14 @@ const tripAdapter = new TripAdapter
 const locationAdapter = new LocationAdapter
 const tripForm = document.querySelector('#trip-form')
 const locationForm = document.querySelector('#location-form')
+const sortBtn = document.querySelector('#sort-trip-btn')
 
 document.addEventListener('DOMContentLoaded', () => {
     tripAdapter.fetchTrips()
     locationAdapter.fetchLocations()
     tripForm.addEventListener('submit', handleFormSubmit)
     locationForm.addEventListener('submit', handleFormSubmitLocation)
+    sortBtn.addEventListener('click', Trip.sortTrips)
     formToggle()
     formToggleLocation() 
 })
