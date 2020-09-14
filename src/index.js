@@ -1,69 +1,70 @@
-const baseUrl = "http://localhost:3000"
-const tripAdapter = new TripAdapter
-const locationAdapter = new LocationAdapter
-const tripForm = document.querySelector('#trip-form')
-const locationForm = document.querySelector('#location-form')
-const sortBtn = document.querySelector('#sort-trip-btn')
+// const baseUrl = "http://localhost:3000"
+const baseUrl = 'https://glacial-inlet-02901.herokuapp.com';
+const tripAdapter = new TripAdapter();
+const locationAdapter = new LocationAdapter();
+const tripForm = document.querySelector('#trip-form');
+const locationForm = document.querySelector('#location-form');
+const sortBtn = document.querySelector('#sort-trip-btn');
 
 document.addEventListener('DOMContentLoaded', () => {
-    tripAdapter.fetchTrips()
-    locationAdapter.fetchLocations()
-    tripForm.addEventListener('submit', handleFormSubmit)
-    locationForm.addEventListener('submit', handleFormSubmitLocation)
-    sortBtn.addEventListener('click', Trip.sortTrips)
-    formToggle()
-    formToggleLocation() 
-})
+  tripAdapter.fetchTrips();
+  locationAdapter.fetchLocations();
+  tripForm.addEventListener('submit', handleFormSubmit);
+  locationForm.addEventListener('submit', handleFormSubmitLocation);
+  sortBtn.addEventListener('click', Trip.sortTrips);
+  formToggle();
+  formToggleLocation();
+});
 
 function handleFormSubmit(e) {
-    e.preventDefault()
+  e.preventDefault();
 
-    const name  = tripForm.querySelector('input[name="name"]').value
-    const description = tripForm.querySelector('input[name="description"]').value
+  const name = tripForm.querySelector('input[name="name"]').value;
+  const description = tripForm.querySelector('input[name="description"]').value;
 
-    let formData = {
-        name,
-        description
-    }
+  let formData = {
+    name,
+    description,
+  };
 
-    tripAdapter.createTrip(formData)
-    tripForm.reset()
+  tripAdapter.createTrip(formData);
+  tripForm.reset();
 }
 
 function formToggle() {
-    const tripBtn = document.querySelector('#new-trip-btn')
+  const tripBtn = document.querySelector('#new-trip-btn');
 
-    tripBtn.addEventListener("click", () => {
-        tripForm.classList.toggle('d-none')
-    })
+  tripBtn.addEventListener('click', () => {
+    tripForm.classList.toggle('d-none');
+  });
 }
 
 function handleFormSubmitLocation(e) {
-    e.preventDefault()
+  e.preventDefault();
 
-    const name = document.querySelector('#location-name').value
-    const lat = document.querySelector('#location-lat').value
-    const lon = document.querySelector('#location-lon').value
-   
-    const trip_id = `${Trip.selected.id}`
+  const name = document.querySelector('#location-name').value;
+  const lat = document.querySelector('#location-lat').value;
+  const lon = document.querySelector('#location-lon').value;
 
-    let formData = {
-        name,
-        lat,
-        lon,
-        trip_id
-    }
+  const trip_id = `${Trip.selected.id}`;
 
-    locationAdapter.createLocation(formData)
+  let formData = {
+    name,
+    lat,
+    lon,
+    trip_id,
+  };
 
-    locationForm.reset()
+  locationAdapter.createLocation(formData);
+
+  locationForm.reset();
 }
 
 function formToggleLocation() {
-    const locationBtn = document.querySelector('#new-location-btn')
-    locationBtn.toggleAttribute('disabled')
+  const locationBtn = document.querySelector('#new-location-btn');
+  locationBtn.toggleAttribute('disabled');
 
-    locationBtn.addEventListener("click", () => {
-        locationForm.classList.toggle('d-none')
-    })
+  locationBtn.addEventListener('click', () => {
+    locationForm.classList.toggle('d-none');
+  });
 }
